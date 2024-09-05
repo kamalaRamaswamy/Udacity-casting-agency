@@ -1,10 +1,12 @@
 import os
-from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, jsonify, abort
+from sqlalchemy import exc
+import json
 from flask_cors import CORS
-import random
 
-from models import setup_db, Question, Category
+from .database.models import setup_db, Question, Category
+from .auth.auth import AuthError, requires_auth
+
 
 QUESTIONS_PER_PAGE = 10
 
@@ -48,6 +50,7 @@ def create_app(test_config=None):
     def get_categories():
         try:
             allCategories = Category.query.all()
+            print('categories')
             if len(allCategories) == 0:
                 abort(404)
 
