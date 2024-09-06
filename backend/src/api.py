@@ -43,6 +43,7 @@ def create_app(test_config=None):
 
     
     @app.route('/actors', methods=['GET'])
+    @requires_auth('get:actors')
     def get_actors_info():
         actors_query = Actor.query.all()
         actors_result = [actor.get_info() for actor in actors_query]
@@ -51,7 +52,8 @@ def create_app(test_config=None):
 
       
     @app.route('/movies', methods=['GET'])
-    def get_movies_info():
+    @requires_auth('get:movies')
+    def get_movies_info(payload):
         movies_query = Movie.query.all()
         movies_result = [movie.get_info() for movie in movies_query]
         return jsonify({
@@ -59,6 +61,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors/<id>', methods=['DELETE'])
+    @requires_auth('delete:actors')
     def delete_actors_info(id):
         actor = Actor.query.get(id)
         if actor is None:
@@ -73,6 +76,7 @@ def create_app(test_config=None):
 
 
     @app.route('/movies/<id>', methods=['DELETE'])
+    @requires_auth('delete:movies')
     def delete_movies_info(id):
         movie = Movie.query.get(id)
         if movie is None:
@@ -87,6 +91,7 @@ def create_app(test_config=None):
 
 
     @app.route('/actors', methods=['POST'])
+    @requires_auth('post:actors')
     def post_actors_info():
         actor = request.get_json()
         print('post actor', actor)
@@ -106,7 +111,8 @@ def create_app(test_config=None):
 
 
     @app.route('/movies', methods=['POST'])
-    def post_movies_info():
+    @requires_auth('post:movies')
+    def post_movies_info(payload):
         try:
             movie = request.get_json()
         except Exception:
