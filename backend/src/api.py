@@ -4,7 +4,7 @@ from sqlalchemy import exc
 import json
 from flask_cors import CORS
 
-from .database.models import setup_db, Question, Category
+from .database.models import setup_db, Actor, Movie
 from .auth.auth import AuthError, requires_auth
 
 
@@ -41,267 +41,249 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods', 'GET,POST,DELETE')
         return response
 
-    """
-    @TODO:
-    Create an endpoint to handle GET requests
-    for all available categories.
-    """
-    @app.route('/categories', methods=['GET'])
-    def get_categories():
-        try:
-            allCategories = Category.query.all()
-            print('categories')
-            if len(allCategories) == 0:
-                abort(404)
+    
+    @app.route('/actors', methods=['GET'])
+    def get_actors_info():
+        actors_query = Actor.query.all()
+        actors_result = [actor.get_info() for actor in actors_query]
+        return jsonify({
+          "actors": actors_result})
 
-            return jsonify({
-                'success': True,
-                'categories': {category.id: category.type for category in allCategories}
-            })
-        except Exception as e:
-            print(e)
+      
+    @app.route('/movies', methods=['GET'])
+    def get_movies_info():
+        movies_query = Movie.query.all()
+        movies_result = [movie.get_info() for movie in movies_query]
+        return jsonify({
+          "movies": movies_result})
 
 
-    """
-    @TODO:
-    Create an endpoint to handle GET requests for questions,
-    including pagination (every 10 questions).
-    This endpoint should return a list of questions,
-    number of total questions, current category, categories.
-
-    TEST: At this point, when you start the application
-    you should see questions and categories generated,
-    ten questions per page and pagination at the bottom of the screen for three pages.
-    Clicking on the page numbers should update the questions.
-    """
-    @app.route('/questions')
-    def get_questions():
-        page = request.args.get('page', 1, type=int)
-        try:
-            questions = Question.query.all()
-            allCategories = Category.query.all()
-
-            if len(questions) == 0:
-                abort(404)
-            if len(allCategories) == 0:
-                abort(404)
-
-            return jsonify({
-                'questions': paginate_questions(request, questions),
-                'total_questions': len(questions),
-                'categories': {category.id: category.type for category in allCategories},
-                'current_category': None,
-                'success': True,
-            })
-
-        except Exception as e:
-            print(e)
-    """
-    @TODO:
-    Create an endpoint to DELETE question using a question ID.
-
-    TEST: When you click the trash icon next to a question, the question will be removed.
-    This removal will persist in the database and when you refresh the page.
-    """
-    @app.route("/questions/<question_id>", methods=['DELETE'])
-    def delete_question(question_id):
-        try:
-            question = Question.query.get(question_id)
-            if question:
-                question.delete()
-                return jsonify({
-                    'success': True,
-                    'deleted': question_id
-                })
-            else:
-                return jsonify({
-                    "success": False,
-                    "error": 404,
-                    "message": "Resource Not Found"
-                }), 404
-
-        except Exception as e:
-            print(e)
-
-    """
-    @TODO:
-    Create a POST endpoint to get questions based on a search term.
-    It should return any questions for whom the search term
-    is a substring of the question.
-
-    TEST: Search by any phrase. The questions list will update to include
-    only question that include that string within their question.
-    Try using the word "title" to start.
-    """
-    @app.route('/questions/search', methods=['POST'])
-    def search_questions():
-        try:
-            body = request.get_json()
-            search_term = body.get('searchTerm', None)
-
-            if search_term:
-                search_results = Question.query.filter(
-                    Question.question.ilike(f'%{search_term}%')).all()
-                print('search', search_results)
-                if len(search_results) == 0:
-                    return jsonify({
-                    "success": False,
-                    "error": 404,
-                    "message": "Resource Not Found"
-                }), 404
-
-
-                return jsonify({
-                    'success': True,
-                    'questions': [question.format() for question in search_results],
-                    'total_questions': len(search_results),
-                    'current_category': None
-                })
+    @app.route('/actors/<id>', methods=['DELETE'])
+    def delete_actors_info(id):
+        actor = Actor.query.get(id)
+        if actor is None:
             abort(404)
-
-        except Exception as e:
-            print(e)
-
-    """
-    @TODO:
-    Create an endpoint to POST a new question,
-    which will require the question and answer text,
-    category, and difficulty score.
-
-    TEST: When you submit a question on the "Add" tab,
-    the form will clear and the question will appear at the end of the last page
-    of the questions list in the "List" tab.
-    """
-    @app.route("/questions", methods=['POST'])
-    def post_question():
         try:
-            body = request.get_json()
-            question = body.get('question')
-            answer = body.get('answer')
-            difficulty = body.get('difficulty')
-            category = body.get('category')
-
-            try:
-                question = Question(question=question, answer=answer,
-                                    difficulty=difficulty, category=category)
-                if question.question:
-                    question.insert()
-
-                return jsonify({
-                    'success': True,
-                    'created': question.id,
-                })
-
-            except:
-                abort(422)
-
-        except Exception as e:
-            print(e)
-
-    """
-    @TODO:
-    Create a GET endpoint to get questions based on category.
-
-    TEST: In the "List" tab / main screen, clicking on one of the
-    categories in the left column will cause only questions of that
-    category to be shown.
-    """
-    @app.route('/categories/<int:category_id>/questions',methods=['GET'])
-    def get_questions_by_category(category_id):
-        try:
-            category = Category.query.get(category_id)
-            if category is None :
-                return jsonify({
-                    "success": False,
-                    "error": 404,
-                    "message": "Resource Not Found"
-                }), 404
-            
-            questions = Question.query.filter(Question.category == category_id).all()
-
-            return jsonify({
-                    'success':True,
-                    'questions':paginate_questions(request, questions),
-                    'total_questions' : len(questions),
-                    'current_category' : category_id
-                    })
-
-        except Exception as e:
-            print(e)
-
-    """
-    @TODO:
-    Create a POST endpoint to get questions to play the quiz.
-    This endpoint should take category and previous question parameters
-    and return a random questions within the given category,
-    if provided, and that is not one of the previous questions.
-
-    TEST: In the "Play" tab, after a user selects "All" or a category,
-    one question at a time is displayed, the user is allowed to answer
-    and shown whether they were correct or not.
-    """
-
-    @app.route('/quizzes', methods=['POST'])
-    def get_quizzes():
-        try:
-            body = request.get_json()
-            prev_questions = body.get('previous_questions', None)
-            quiz_category = body.get('quiz_category', None)
-            questions = []
-            quiz_question = {}
-            if quiz_category['id'] == 0:
-                 questions = Question.query.filter(
-                    Question.id.notin_(prev_questions)).all()
-            else:
-                selected_category = Category.query.filter(
-                    Category.type == str(quiz_category['type'])).one_or_none()
-                category_id = selected_category.id
-                questions = Question.query.filter(
-                        Question.id.notin_(prev_questions),
-                        Question.category == category_id).all()
-            if len(questions) == 0:
-                quiz_question = None
-            else:
-                for i in range(len(questions)):
-                    question = random.choice(questions)
-                    if(question):
-                        quiz_question = question.format()
-            return jsonify({
-                'question': quiz_question,
-                'success': True})
-        except Exception as e:
+            actor.delete()
+        except Exception:
             abort(500)
+        return jsonify({
+          "success": True
+        })
 
-    """
-    @TODO:
-    Create error handlers for all expected errors
-    including 404 and 422.
-    """
 
+    @app.route('/movies/<id>', methods=['DELETE'])
+    def delete_movies_info(id):
+        movie = Movie.query.get(id)
+        if movie is None:
+            abort(404)
+        try:
+            movie.delete()
+        except Exception:
+            abort(500)
+        return jsonify({
+          "success": True
+        })
+
+
+    @app.route('/actors', methods=['POST'])
+    def post_actors_info():
+        actor = request.get_json()
+        print('post actor', actor)
+    
+        try:
+            if 'id' in actor:
+                actor_ins = Actor(id=actor['id'], name=actor['name'], age=actor['age'], gender=actor['gender'])
+            else:
+                actor_ins = Actor(name=actor['name'], age=actor['age'], gender=actor['gender'])       
+        except Exception:
+            abort(422)
+        try:
+            actor_ins.insert()
+        except Exception:
+            abort(500)
+        return jsonify(actor)
+
+
+    @app.route('/movies', methods=['POST'])
+    def post_movies_info():
+        try:
+            movie = request.get_json()
+        except Exception:
+            abort(400)
+        try:
+            if 'id' in movie:
+                movie_ins = Movie(id=movie['id'], title=movie['title'], release_data=movie['release_data'])
+            else:
+                movie_ins = Movie(title=movie['title'], release_data=movie['release_data'])
+        except Exception:
+            abort(422)
+        try:
+            movie_ins.insert()
+        except Exception:
+            abort(500)
+        return jsonify(movie)
+
+
+    @app.route('/actors/<id>', methods=['PATCH'])
+    def patch_actors_info(id):
+        try:
+            actor = Actor.query.get(id)
+        except Exception:
+            abort(404)
+        try:
+            patch_info = request.get_json()  
+        except Exception:
+            abort(400)
+
+        try:
+            name = actor.get('name', None)
+            age = actor.get('age', None)
+            gender = actor.get('gender', None)
+            actor = Actor(id=id, name=name, age=age, gender=gender)
+            print('update actor', actor)
+            actor.update()
+        except:
+            abort(422)
+        # for key, value in patch_info.items():
+        #     if key.lower() in ['name', 'age', 'gender']:
+        #         if key.lower() == 'name':
+        #             actor.name = value
+        #         elif key.lower() == 'age':
+        #             actor.age = value
+        #         else:
+        #             actor.gender = value
+        #     else:
+        #         abort(422)
+        try:
+            actor.update()
+        except Exception:
+            abort(500)
+        return jsonify({
+          "success": True
+        })
+
+
+    # @app.route('/movies/<id>', methods=['PATCH'])
+    # def patch_movies_info(payload, id):
+    #     try:
+    #         movie = Movie.query.get(id)
+    #     except Exception:
+    #         abort(404)
+    #     try:
+    #         patch_info = request.get_json()  
+    #     except Exception:
+    #         abort(400)
+    #     for key, value in patch_info.items():
+    #         if key in ['title', 'release_data']:
+    #             if key == "title":
+    #                 movie.title = value
+    #             else:
+    #                 movie.release_data = value
+    #         else:
+    #             abort(422)
+    #     try:
+    #         movie.update()
+    #     except Exception:
+    #         db.session.rollback()
+    #         abort(500)
+    #     finally:
+    #         db.session.close()
+    #     return jsonify({
+    #       "success": True
+    #     })
+
+
+    # Error Handling
+    '''
+    Example error handling for unprocessable entity
+    '''
+    @app.errorhandler(422)
+    def unprocessable(error):
+        return jsonify({
+                        "success": False,
+                        "error": 422,
+                        "message": "unprocessable"
+                        }), 422
+
+
+    '''
+    @TODO implement error handlers using the @app.errorhandler(error) decorator
+        each error handler should return (with approprate messages):
+                jsonify({
+                        "success": False,
+                        "error": 404,
+                        "message": "resource not found"
+                        }), 404
+
+    '''
+
+    '''
+        error handler for not found
+    '''
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({
-            "success": False,
-            "error": 404,
-            "message": "Resource Not Found"
-        }), 404
+                        "success": False,
+                        "error": 404,
+                        "message": "not found"
+                        }), 404
 
-    @app.errorhandler(422)
-    def not_processable(error):
-        return jsonify({
-            "success": False,
-            "error": 422,
-            "message": "Not Processable"
-        }), 422
 
+    '''
+      error handler for authorization error 
+    '''
+    @app.errorhandler(AuthError)
+    def auth_error(error):
+        if error.status_code == 401:
+            return jsonify({
+                        "success": False,
+                        "error": 401,
+                        "message": "unauthorized"
+                        }), 401
+        elif error.status_code == 403:
+            return jsonify({
+                        "success": False,
+                        "error": 403,
+                        "message": "forbidden"
+                        }), 403
+
+
+    '''
+      error handler for internal service error
+    '''
     @app.errorhandler(500)
-    def server_error(error):
+    def internal_error(error):
         return jsonify({
-            "success": False,
-            "error": 500,
-            "message": "Internal Server Error"
-        }), 500
+                        "success": False,
+                        "error": 500,
+                        "message": "internal service error"
+                        }), 500
 
+
+    '''
+      error handler for no appropriate key 
+    '''
+    @app.errorhandler(400)
+    def no_appropriate_key(error):
+        return jsonify({
+                    "success": False,
+                    "error": 400,
+                    "message": "no appropriate key"
+                    }), 400
+
+
+    '''
+      error handler for no processable entity
+    '''
+    @app.errorhandler(422)
+    def unprocessable_entity(error):
+        return jsonify({
+                    "success": False,
+                    "error": 422,
+                    "message": "unprocessable entity"
+                    }), 422
+    
 
     return app
 

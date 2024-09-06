@@ -25,60 +25,72 @@ def setup_db(app, database_path=database_path):
     with app.app_context():
         db.create_all()
 
-"""
-Question
+movie_shows = db.Table('Movie_shows',
+    db.Column('movie_id', db.Integer, db.ForeignKey('Movie.id'), primary_key=True),
+    db.Column('actor_id', db.Integer, db.ForeignKey('Actor.id'), primary_key=True)
+)
 
-"""
-class Question(db.Model):
-    __tablename__ = 'questions'
+class Movie(db.Model):
+    __tablename__ = 'Movie'
 
-    id = Column(Integer, primary_key=True)
-    question = Column(String)
-    answer = Column(String)
-    category = Column(String)
-    difficulty = Column(Integer)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    release_data = db.Column(db.DateTime, nullable=False)
+    actors = db.relationship('Actor', secondary=movie_shows,
+      backref=db.backref('movies', lazy=True))
 
-    def __init__(self, question, answer, category, difficulty):
-        self.question = question
-        self.answer = answer
-        self.category = category
-        self.difficulty = difficulty
+    def __rept__(self):
+        print(f'<Movie {self.id} - {self.title} - {self.release_data}>')
 
     def insert(self):
         db.session.add(self)
-        db.session.commit()
-
-    def update(self):
         db.session.commit()
 
     def delete(self):
         db.session.delete(self)
         db.session.commit()
 
-    def format(self):
+    def update(self):
+        db.session.commit()
+
+    def get_info(self):
         return {
             'id': self.id,
-            'question': self.question,
-            'answer': self.answer,
-            'category': self.category,
-            'difficulty': self.difficulty
-            }
+            'title': self.title,
+            'release_data': self.release_data
+        }
 
-"""
-Category
 
-"""
-class Category(db.Model):
-    __tablename__ = 'categories'
+'''
+Actor
+    Actors with attributes name, age and gender, it's the child class of the movie 
+'''
+class Actor(db.Model):
+    __tablename__ = 'Actor'
 
-    id = Column(Integer, primary_key=True)
-    type = Column(String)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String, nullable=False)
 
-    def __init__(self, type):
-        self.type = type
+    def __rept__(self):
+        print(f'<Actor {self.id} - {self.name} - {self.age} - {self.gender}>')
 
-    def format(self):
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def get_info(self):
         return {
             'id': self.id,
-            'type': self.type
-            }
+            'name': self.name,
+            'age': self.age,
+            'gender': self.gender
+        }
