@@ -44,7 +44,7 @@ def create_app(test_config=None):
     
     @app.route('/actors', methods=['GET'])
     @requires_auth('get:actors')
-    def get_actors_info():
+    def get_actors_info(payload):
         actors_query = Actor.query.all()
         actors_result = [actor.get_info() for actor in actors_query]
         return jsonify({
@@ -92,7 +92,7 @@ def create_app(test_config=None):
 
     @app.route('/actors', methods=['POST'])
     @requires_auth('post:actors')
-    def post_actors_info():
+    def post_actors_info(payload):
         actor = request.get_json()
         print('post actor', actor)
     
@@ -131,10 +131,38 @@ def create_app(test_config=None):
         return jsonify(movie)
 
 
-    @app.route('/actors/<id>', methods=['PATCH'])
-    def patch_actors_info(id):
+    @app.route('/actors/<int:id>', methods=['PATCH'])
+    @requires_auth('patch:actors')
+    def patch_actors_info(payload, id):
         try:
             actor = Actor.query.get(id)
+        except Exception:
+            abort(404)
+        try:
+            patch_info = request.get_json()
+            print('patch info', patch_info)
+        except Exception:
+            abort(400)
+
+        try:
+            name = patch_info.get('name', None)
+            print('patch name', name)
+            age = patch_info.get('age', None)
+            gender = patch_info.get('gender', None)
+            actor = Actor(id=id, name=name, age=age, gender=gender)
+            actor.update()
+        except:
+            abort(422)
+        return jsonify({
+          "success": True
+        })
+
+
+    @app.route('/movies/<id>', methods=['PATCH'])
+    @requires_auth('patch:movies')
+    def patch_movies_info(id):
+        try:
+            movie = Movie.query.get(id)
         except Exception:
             abort(404)
         try:
@@ -143,61 +171,17 @@ def create_app(test_config=None):
             abort(400)
 
         try:
-            name = actor.get('name', None)
-            age = actor.get('age', None)
-            gender = actor.get('gender', None)
-            actor = Actor(id=id, name=name, age=age, gender=gender)
-            print('update actor', actor)
-            actor.update()
+            title = patch_info.get('title', None)
+            release_data = patch_info.get('release_data', None)
+
+            movie = Movie(title=title, release_data=release_data)
+            movie.update()
         except:
             abort(422)
-        # for key, value in patch_info.items():
-        #     if key.lower() in ['name', 'age', 'gender']:
-        #         if key.lower() == 'name':
-        #             actor.name = value
-        #         elif key.lower() == 'age':
-        #             actor.age = value
-        #         else:
-        #             actor.gender = value
-        #     else:
-        #         abort(422)
-        try:
-            actor.update()
-        except Exception:
-            abort(500)
+
         return jsonify({
           "success": True
         })
-
-
-    # @app.route('/movies/<id>', methods=['PATCH'])
-    # def patch_movies_info(payload, id):
-    #     try:
-    #         movie = Movie.query.get(id)
-    #     except Exception:
-    #         abort(404)
-    #     try:
-    #         patch_info = request.get_json()  
-    #     except Exception:
-    #         abort(400)
-    #     for key, value in patch_info.items():
-    #         if key in ['title', 'release_data']:
-    #             if key == "title":
-    #                 movie.title = value
-    #             else:
-    #                 movie.release_data = value
-    #         else:
-    #             abort(422)
-    #     try:
-    #         movie.update()
-    #     except Exception:
-    #         db.session.rollback()
-    #         abort(500)
-    #     finally:
-    #         db.session.close()
-    #     return jsonify({
-    #       "success": True
-    #     })
 
 
     # Error Handling
