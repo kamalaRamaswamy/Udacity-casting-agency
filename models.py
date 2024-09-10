@@ -5,11 +5,13 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
-database_username = os.getenv("database_username")
-database_password = os.getenv("database_password")
-database_name = os.getenv("database_name")
+# database_username = os.getenv("database_username")
+# database_password = os.getenv("database_password")
+# database_name = os.getenv("database_name")
 
-database_path = 'postgresql://{}:{}@{}/{}'.format(database_username, database_password, 'localhost:5432', database_name)
+# database_path = 'postgresql://{}:{}@{}/{}'.format(database_username, database_password, 'localhost:5432', database_name)
+
+database_path = os.getenv("render_host_database_internal_url")
 
 db = SQLAlchemy()
 
