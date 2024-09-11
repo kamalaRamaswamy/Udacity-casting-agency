@@ -24,10 +24,10 @@ class CapstoneTest(unittest.TestCase):
     def setUp(self):
 
         DB_PATH = os.getenv("database_username")
-        praducer_token = os.getenv("PRODUCER_TOKEN")
+        producer_token = os.getenv("PRODUCER_TOKEN")
         self.app = create_app()
         self.client = self.app.test_client
-        self.praducer_token = praducer_token
+        self.producer_token = producer_token
         self.test_actor_data = {"name": "Vanessa", "age": 32, "gender":"female"}
         self.test_movie_data = {"title": "Mission Impossible", "release_data":"2018-08-31"}
 
@@ -39,14 +39,14 @@ class CapstoneTest(unittest.TestCase):
 
     def test_get_actors(self):
         response = self.client().get('/actors',
-            headers={'Authorization': f'Bearer {self.praducer_token}'})
+            headers={'Authorization': f'Bearer {self.producer_token}'})
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
 
     def test_get_movies(self):
         response = self.client().get('/movies',
-            headers={'Authorization': f'Bearer {self.praducer_token}'})
+            headers={'Authorization': f'Bearer {self.producer_token}'})
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -55,7 +55,7 @@ class CapstoneTest(unittest.TestCase):
     def test_post_actor(self):
         response = self.client().post('/actors',
             json=self.test_actor_data,
-            headers={'Authorization': f'Bearer {self.praducer_token}'})
+            headers={'Authorization': f'Bearer {self.producer_token}'})
 
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
@@ -66,7 +66,7 @@ class CapstoneTest(unittest.TestCase):
     def test_post_movie(self):
         response = self.client().post('/movies',
             json=self.test_movie_data,
-            headers={'Authorization': f'Bearer {self.praducer_token}'})
+            headers={'Authorization': f'Bearer {self.producer_token}'})
 
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
@@ -78,10 +78,24 @@ class CapstoneTest(unittest.TestCase):
         new_actor = {"name": "Lily", "age": 19, "gender": "female"}
         response = self.client().patch('/actors/1',
             json=new_actor,
-            headers={'Authorization': f'Bearer {self.praducer_token}'})
+            headers={'Authorization': f'Bearer {self.producer_token}'})
 
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
+
+    def test_post_actor_fail(self):
+        response = self.client().post('/actors',
+            json=self.test_actor_data)
+
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 500)
+
+    def test_post_movie_fail(self):
+        response = self.client().post('/movies',
+            json=self.test_actor_data)
+
+        data = json.loads(response.data)
+        self.assertEqual(response.status_code, 500)
 
 
 if __name__ == "__main__":

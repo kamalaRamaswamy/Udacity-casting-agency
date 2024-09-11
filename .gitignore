@@ -12,5 +12,4 @@ venv
 ehthumbs.db
 Thumbs.db
 env/
-frontend/node_modules/
 backend/src/virt

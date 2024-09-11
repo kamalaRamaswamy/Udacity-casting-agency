@@ -77,8 +77,5 @@ PATCH /actors/ and /movies/
 To deploy the tests, run
 
 ```bash
-dropdb trivia_test
-createdb trivia_test
-psql trivia_test < trivia.psql
-python test_flaskr.py
+python test_app.py
 ```
