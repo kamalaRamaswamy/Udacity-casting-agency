@@ -5,13 +5,6 @@ The Casting Agency models a company that is responsible for creating movies and 
 Hosted on Render - https://udacity-casting-agency-dfc1.onrender.com/actors
 
 
-ROLES
-
-Casting assistant 
-casting directors 
-executive directors
-
-
 ***********************************************************************************************************
 
 ## Setting up the Backend
@@ -36,40 +29,27 @@ flask run --reload
 
 ***********************************************************************************************************
 
+### Models
+
+```
+Movies with attributes title and release data.
+Actors with attributes name, age and gender
+```
+
+***********************************************************************************************************
+
+### Roles
+
+Casting assistant,
+casting directors,
+executive directors,
 
 
 ***********************************************************************************************************
 
-API Server
-All accessable endpoints of the project are located in the app.py file.
+### Endpoints
 
-Run the following command in the project root folder to start the local development server:
-
-flask run
-
-***********************************************************************************************************
-
-API endpoints
-
-Public endpoints
-
-GET '/movies'
-Fetches a dictionary with id and title of movies who posted their release date to the database.
-Request Arguments: None
-Returns: A JSON object with two keys: 'success' and 'success meessage' - a dictionary with company id and name.
-Sample curl request: curl -X GET http://127.0.0.1:5000/movies 
-
-Sample response:
-
-{
-    "movies": {
-        "1": "Kyle XY",
-        "2": "Black Panther",
-        "3": "Bob"
-    },
-    "success": true
-}
-
-Sample curl request: curl -X GET http://127.0.0.1:5000/companies 
-
-
+GET /actors and /movies
+DELETE /actors/ and /movies/
+POST /actors and /movies and
+PATCH /actors/ and /movies/
