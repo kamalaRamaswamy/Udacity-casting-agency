@@ -45,19 +45,17 @@ def create_app(test_config=None):
     @app.route('/actors', methods=['GET'])
     @requires_auth('get:actors')
     def get_actors_info(payload):
-        actors_query = Actor.query.all()
-        actors_result = [actor.get_info() for actor in actors_query]
+        actors = Actor.query.all()
         return jsonify({
-          "actors": actors_result})
+          "actors": actor.get_info() for actor in actors})
 
       
     @app.route('/movies', methods=['GET'])
     @requires_auth('get:movies')
     def get_movies_info(payload):
-        movies_query = Movie.query.all()
-        movies_result = [movie.get_info() for movie in movies_query]
+        movies = Movie.query.all()
         return jsonify({
-          "movies": movies_result})
+          "movies": movie.get_info() for movie in movies})
 
 
     @app.route('/actors/<id>', methods=['DELETE'])
@@ -93,9 +91,7 @@ def create_app(test_config=None):
     @app.route('/actors', methods=['POST'])
     @requires_auth('post:actors')
     def post_actors_info(payload):
-        actor = request.get_json()
-        print('post actor', actor)
-    
+        actor = request.get_json()    
         try:
             if 'id' in actor:
                 actor_ins = Actor(id=actor['id'], name=actor['name'], age=actor['age'], gender=actor['gender'])
@@ -131,7 +127,7 @@ def create_app(test_config=None):
         return jsonify(movie)
 
 
-    @app.route('/actors/<int:id>', methods=['PATCH'])
+    @app.route('/actors/<id>', methods=['PATCH'])
     @requires_auth('patch:actors')
     def patch_actors_info(payload, id):
         try:
@@ -140,13 +136,11 @@ def create_app(test_config=None):
             abort(404)
         try:
             patch_info = request.get_json()
-            print('patch info', patch_info)
         except Exception:
             abort(400)
 
         try:
             name = patch_info.get('name', None)
-            print('patch name', name)
             age = patch_info.get('age', None)
             gender = patch_info.get('gender', None)
             actor = Actor(id=id, name=name, age=age, gender=gender)
