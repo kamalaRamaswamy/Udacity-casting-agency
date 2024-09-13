@@ -3,11 +3,14 @@ from flask import request
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-AUTH0_DOMAIN = 'dev-gtukrfvev3mrepk8.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'casting'
+AUTH0_DOMAIN = os.getenv("dev-gtukrfvev3mrepk8.us.auth0.com")
+ALGORITHMS = os.getenv("RS256")
+API_AUDIENCE = os.getenv("casting")
 
 ## AuthError Exception
 '''

@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "47679673-2f04-4ccd-8247-9cc5db688a07",
+		"name": "Casting Agency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37313875"
+	},
+	"item": [
+		{
+			"name": "Fetching actors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/actors",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/movies",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post actors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hi\",\r\n    \"age\": 30,\r\n    \"gender\": \"female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/actors",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"hello\",\r\n    \"release_data\": \"2018-01-03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/movies",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete actor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/actors/3",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"actors",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/movies/3",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update actors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"aaabbb\",\r\n    \"age\": 30,\r\n    \"gender\": \"female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/actors/47",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"actors",
+						"47"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Indwc0N0b2NudkdEZmIwX21OTXZBdyJ9.eyJpc3MiOiJodHRwczovL2Rldi1ndHVrcmZ2ZXYzbXJlcGs4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NmRkMWJmODY5ODQ5YTdjYmRhY2ZkNGMiLCJhdWQiOiJjYXN0aW5nIiwiaWF0IjoxNzI2MjAzMjgwLCJleHAiOjE3MjYyODk2ODAsInNjb3BlIjoiIiwiYXpwIjoiRTc3VmZ5T044UkpuSnM1ZzlDa2d4YmVlMFpDMDlaRWYiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.edQKWG2VYbLldKku5Log-K3jBj0g4KW87afqHwTrsPfQ6x9Oyb-HWpFyw83kVoLDhNSjjNTRhGuZwnjubXEfaqTcpK0alR-yQxdEzK1COn9e7Y8m4mu16wwwUXsi1huu2KW4gvhEkUnRqi_rpI2Dy4GrEnEJJCCW2S2CZLpmLd7lY7mKTN1LD8tik9VJA-KwF1e5r9hNTrgDT4xjkyWpcLdnrwKuTqPZLo2lcV2NFrWVj3b_GWLDyj9QOYA3GO5okS7qTmy44WeZMGQxzrdN2ZhvbZ9tJ1xiN-NWIrvFya3AxJRShxiUH-5kofO1Z34376Svkqy5frPerWgB1OqMLg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"title\": \"hello there\",\r\n    \"release_data\": \"2018-01-03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://udacity-casting-agency-dfc1.onrender.com/movies/2",
+					"protocol": "https",
+					"host": [
+						"udacity-casting-agency-dfc1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"movies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
