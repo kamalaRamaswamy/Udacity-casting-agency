@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-AUTH0_DOMAIN = os.getenv("dev-gtukrfvev3mrepk8.us.auth0.com")
-ALGORITHMS = os.getenv("RS256")
-API_AUDIENCE = os.getenv("casting")
+AUTH0_DOMAIN = os.getenv(AUTH0_DOMAIN)
+ALGORITHMS = os.getenv(ALGORITHMS)
+API_AUDIENCE = os.getenv(API_AUDIENCE)
 
 ## AuthError Exception
 '''
