@@ -1,4 +1,5 @@
 import json
+import os
 from flask import request
 from functools import wraps
 from jose import jwt
@@ -8,9 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-AUTH0_DOMAIN = os.getenv(AUTH0_DOMAIN)
-ALGORITHMS = os.getenv(ALGORITHMS)
-API_AUDIENCE = os.getenv(API_AUDIENCE)
+AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+ALGORITHMS = os.getenv("ALGORITHMS")
+API_AUDIENCE = os.getenv("API_AUDIENCE")
 
 ## AuthError Exception
 '''
